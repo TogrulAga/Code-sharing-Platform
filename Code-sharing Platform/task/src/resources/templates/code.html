@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Code</title>
+    <link rel="stylesheet"
+          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+    <ul>
+        <li th:each="code : ${codes}">
+            <span id="load_date" th:text="${code.getFormattedDate()}"> ... </span>
+            <th:block th:if="${code.expiresByViews}">
+                <span id="views_restriction" th:text="|${code.views} more views allowed|"> ... </span>
+            </th:block>
+            <th:block th:if="${code.expiresByTime}">
+                <span id="time_restriction" th:text="|The code will be available for ${code.time} seconds|"> ... </span>
+            </th:block>
+            <pre id="code_snippet">
+                <code th:text="${code.code}"></code>
+            </pre>
+        </li>
+    </ul>
+</body>
+</html>
